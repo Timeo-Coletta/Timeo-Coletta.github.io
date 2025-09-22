@@ -1,5 +1,5 @@
 ---
-title: "Timeo-Coletta.github.io"
+title: "Timeo Coletta"
 ---
 
 This is a Quarto website.
@@ -7,5 +7,6 @@ This is a Quarto website.
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 
 ```{r}
-1 + 1
 ```
+
+"Hello! My name is Timeo Coletta. I'm a student at Pomona College studying International Relations, Economics, and Data Science. D, I play on a cross-collegiate rugby team. Welcome to my website!"
