@@ -1,0 +1,81 @@
+---
+title: "09-9 Passport Index"
+description: |
+  Analysis of the Henley Passport Index data from TidyTuesday
+  
+  The Henley Passport Index is produced by Henley & Partners and captures the number of countries to which travelers in possession of each passport in the world may enter visa free.
+author: "Timeo Coletta"
+date: September 9, 2025
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: visual
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(jsonlite)
+library(purrr)
+library(tidyverse)
+library(plotly)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+country_lists <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-09-09/country_lists.csv')
+rank_by_year <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-09-09/rank_by_year.csv')
+
+```
+
+```{r}
+travel_perms <- country_lists |> 
+  pivot_longer(
+    cols = c(visa_required, visa_online, visa_on_arrival, 
+             visa_free_access, electronic_travel_authorisation),
+    names_to = "visa_type",
+    values_to = "json_str"
+ ) |> 
+  mutate(
+    json_parsed = map(json_str, ~ fromJSON(.)[[1]])
+) |> 
+  unnest(json_parsed, names_sep = "_") |> 
+  select(-json_str) |> 
+  rename(from = code, from_name = country,
+         to = json_parsed_code, to_name = json_parsed_name) |> 
+  mutate(from = ifelse(from_name == "Namibia", "NA", from)) 
+
+# adding the home countries so that they show up on the map
+home_countries <- travel_perms |> 
+  select(from, from_name) |> 
+  distinct() |> 
+  mutate(visa_type = "domestic",
+         to = from,
+         to_name = from_name)
+travel_perms <- travel_perms |> rbind(home_countries)
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+world_data <- world |> 
+  left_join(travel_perms, by = c("iso_a2_eh" = "to"))
+
+```
+
+```{r}
+plot_ly(world_data) |> 
+  add_sf(
+    data = world_data |> filter(from == "MX"),
+    split = ~iso_a2_eh,
+    color = ~visa_type,
+    text = ~paste("Country:", to_name, "<br>Visa:", visa_type),
+    hoveron = "fills"
+  ) |> 
+  layout(title = " Visa Connections for Mexicans",    showlegend = FALSE)
+```
+
+```         
+```

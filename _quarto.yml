@@ -3,20 +3,27 @@ project:
   output-dir: docs
 
 website:
-  title: "Timeo-Coletta.github.io"
+  title: "Timeo Coletta"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
-
+      - text: "Data Viz"
+        menu: 
+         - text: "Frogs in Australia"
+           href: 09-2 Frogs.html
+         - text: "Henley Passport Index"
+           href: 09-9 Passport Index.html
+         - text: "Recipes"
+           href: 09-16 Recipes.html
+      
+      
 format:
   html:
     theme:
-      - cosmo
-      - brand
+      light: yeti
+      dark: darkly
     css: styles.css
     toc: true
-
-editor: visual
-
+    page-layout: full
