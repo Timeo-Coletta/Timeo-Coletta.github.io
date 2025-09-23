@@ -12,11 +12,11 @@ website:
       - text: "Data Viz"
         menu: 
          - text: "Frogs in Australia"
-           href: 09-2 Frogs.html
-         - text: "Henley Passport Index"
-           href: 09-9 Passport Index.html
+           href: 09-2-Frogs.html
+         - text: "Passport Index"
+           href: 09-9-Passport Index.html
          - text: "Recipes"
-           href: 09-16 Recipes.html
+           href: 09-16-Recipes.html
       
       
 format:
