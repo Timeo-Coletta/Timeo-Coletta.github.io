@@ -9,8 +9,10 @@ about:
   links:
     - text: LinkedIn
       href: https://www.linkedin.com/in/timeo
+      target: _blank
     - text: GitHub
       href: https://github.com/Timeo-Coletta/Timeo-Coletta.github.io
+      target: _blank
 ---
 
 ```{r}
