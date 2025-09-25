@@ -20,7 +20,7 @@ execute:
 
 <a href = "https://www.frogid.net.au/explore" target = "_blank" > FrogID Data </a>
 
-<a href = "https://github.com/hardin47/TidyTuesday/tree/gh-pages/2025-09-02" target = "_blank" > Tidy Tuesday Data</a>
+<a href = "https://github.com/rfordatascience/tidytuesday/tree/main/data/2025/2025-09-02" target = "_blank" > Tidy Tuesday Data</a>
 
 ```{r}
 library(maps)
