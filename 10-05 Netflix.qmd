@@ -129,7 +129,7 @@ Ratings_Breakdown |>
 
 The above plot displays the distribution of ratings based on the genre of a production that can be found on Netflix. Some genres overwhelmingly fit under a single rating. For example, the Comedy & Drama genre is almost exclusively rated R & MA, with a similar but less marked trend in the Crime genre and Horror & Thriller genre. These three all have one rating category making up 60%+ of their respective genre's production. On the other hand, four genres are particularly balanced in their ratings split. The Children & Family genre, Classic, Cult, & Musicals genre, Reality genre, and the Documentaries genre all have at least three rating categories with a 20%+ share of their respective genre's productions. The other 5 genres fall somewhere in between these two groups.
 
-<p style="font-size: 25px:">**Analysis #2** What is geographical split of production locations for titles added to Netflix in 2019 compared to those added in 2020?</p>
+<p style="font-size: 25px;">**Analysis #2** What is geographical split of production locations for titles added to Netflix in 2019 compared to those added in 2020?</p>
 
 ```{r}
 Geo_Data <- Netflix_data |>
@@ -218,7 +218,7 @@ plot_2020
 
 The above maps display ranges for the number of titles added to Netflix by the country in which they were produced. By hovering your cursor over a country, you can identify the specific number of titles added. The comparison between 2019 and 2020 allows us to see which countries saw more of their productions added to the platform year over year. Focusing on North American countries, we see some interesting changes. While most productions added were in the US during both years, the number actually declined from 2019 to 2020, declining from 926 to 888 titles. Canada saw an increase from 91 to 115 titles. Finally, Mexico saw a decline from 41 to 32 titles. By conducting a broader time series analysis, we could make inferences about how some countries become more favorable production environments over time (which increases the number of titles produced in that country Netflix adds). Another explanation could be that as Netflix attempts to reach wider audiences, they diversify the titles that they offer on their streaming platform. A time series analysis could provide insight on Netflix's changing global content strategy.
 
-<p style="font-size: 25px:">**Analysis #3** What is the average title length based on a production's type (show vs movie)? Do movie titles contain more descriptive phrases (like "The \[X\] of \[Y\]") compared to TV show titles?</p>
+<p style="font-size: 25px;">**Analysis #3** What is the average title length based on a production's type (show vs movie)? Do movie titles contain more descriptive phrases (like "The \[X\] of \[Y\]") compared to TV show titles</p>
 
 ```{r}
 title_patterns <- Netflix_data |>
