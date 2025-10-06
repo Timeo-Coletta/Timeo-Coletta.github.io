@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "Timeo Coletta"
+  title: ""
   navbar:
     left:
       - href: index.qmd
@@ -12,11 +12,13 @@ website:
       - text: "Data Viz"
         menu: 
          - text: "Frogs in Australia"
-           href: 09-2-Frogs.html
+           href: 09-2 Frogs.html
          - text: "Passport Index"
-           href: 09-9-Passport Index.html
+           href: 09-9 Passport Index.html
          - text: "Recipes"
-           href: 09-16-Recipes.html
+           href: 09-16 Recipes.html
+         - text: "Netflix"
+           href: 10-05 Netflix.html
       
       
 format:
