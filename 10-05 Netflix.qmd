@@ -74,7 +74,7 @@ Genre_Ratings <- Netflix_data |>
       str_detect(First_Genre, "Anime") ~ "Anime",
       str_detect(First_Genre, "Children|Kids'|Family") ~ "Children & Family",
       str_detect(First_Genre, "Classic|Cult|Musical") ~ "Classics, Cult, & Musicals",
-      str_detect(First_Genre, "Comedy|Stand-up") ~ "Comedy & Drama",
+      str_detect(First_Genre, "Comedy|Stand-up|Drama") ~ "Comedy & Drama",
       str_detect(First_Genre, "Crime") ~ "Crime",
       str_detect(First_Genre, "Documentaries|Docuseries") ~ "Documentaries",
       str_detect(First_Genre, "Horror|Thriller") ~ "Horror & Thriller",
@@ -127,7 +127,7 @@ Ratings_Breakdown |>
 
 <p style="font-size: 15px;">**Plot description:**</p>
 
-The above plot displays the distribution of ratings based on the genre of a production that can be found on Netflix. Some genres overwhelmingly fit under a single rating. For example, the Comedy & Drama genre is almost exclusively rated R & MA, with a similar but less marked trend in the Crime genre and Horror & Thriller genre. These three all have one rating category making up 60%+ of their respective genre's production. On the other hand, four genres are particularly balanced in their ratings split. The Children & Family genre, Classic, Cult, & Musicals genre, Reality genre, and the Documentaries genre all have at least three rating categories with a 20%+ share of their respective genre's productions. The other 5 genres fall somewhere in between these two groups.
+The above plot displays the distribution of ratings based on the genre of a production that can be found on Netflix. Some genres overwhelmingly fit under a single rating. For example, the Comedy & Drama genre is mostly rated R & MA, with a similar but more marked trend in the Crime genre and Horror & Thriller genre. These three all have one rating category making up 60%+ of their respective genre's production. On the other hand, four genres are particularly balanced in their ratings split. The Children & Family genre, Classic, Cult, & Musicals genre, Reality genre, and the Documentaries genre all have at least three rating categories with a 20%+ share of their respective genre's productions. The other 5 genres fall somewhere in between these two groups.
 
 <p style="font-size: 25px;">**Analysis #2** What is geographical split of production locations for titles added to Netflix in 2019 compared to those added in 2020?</p>
 
