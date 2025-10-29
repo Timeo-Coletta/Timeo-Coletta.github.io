@@ -19,6 +19,9 @@ website:
            href: 09-16 Recipes.html
          - text: "Netflix"
            href: 10-05 Netflix.html
+         - text: "Adoptions in Long Beach"
+           href: 10-28 Animal Shelter.html
+
       
       
 format:

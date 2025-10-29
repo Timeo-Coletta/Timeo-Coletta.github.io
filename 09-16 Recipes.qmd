@@ -39,9 +39,9 @@ cuisines <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/t
          empty = 5 - full - half) |> 
   mutate(stars = ifelse(is.na(avg_rating), NA,
                               paste0( 
-    strrep('<span style="color: gold;">&#9733;</span>', full),   # ★
-    strrep('<span style="color: gold;"><i class="fa-solid fa-star-half"></i></span>', half),    # optional placeholder for half
-    strrep('<span style="color: lightgray;">&#9733;</span>', empty) # ☆ in grey
+    strrep('<span style="color: gold;">&#9733;</span>', full),
+    strrep('<span style="color: gold;"><i class="fa-solid fa-star-half"></i></span>', half),
+    strrep('<span style="color: lightgray;">&#9733;</span>', empty)
   
 )))
 ```

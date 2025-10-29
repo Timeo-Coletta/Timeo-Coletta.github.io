@@ -1,9 +1,9 @@
 ---
 title: "10-5 Netflix"
 description: |
-  Analysis of this Netflix data from TidyTuesday.
+  Analysis of Netflix data from TidyTuesday.
   
-  The data this comes from Kaggle with credit to Shivam Bansal, consisting of tv shows and movies available on Netflix as of 2019. The dataset is collected from Flixable, a third-party Netflix search engine. In 2018, they released a report showing that the number of shows on Netflix has nearly tripled since 2010.
+  The data comes from Kaggle with credit to Shivam Bansal, consisting of tv shows and movies available on Netflix as of 2019. The dataset is collected from Flixable, a third-party Netflix search engine. In 2018, they released a report showing that the number of shows on Netflix has nearly tripled since 2010.
 
 author: "Timeo Coletta"
 date: October 5, 2025
@@ -30,13 +30,22 @@ library(purrr)
 library(tidyverse)
 library(plotly)
 library(rnaturalearth)
+library(gt)
 
 Netflix_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-04-20/netflix_titles.csv')
 ```
 
-<p style="font-size: 25px;">**Analysis #1:** What is the breakdown (in % terms) of ratings for productions based on their main listed genre on Netflix?</p>
+<p style="font-size: 25px;">
 
-<p style="font-size: 15px;">**Genres:**</p>
+**Analysis #1:** What is the breakdown (in % terms) of ratings for productions based on their main listed genre on Netflix?
+
+</p>
+
+<p style="font-size: 15px;">
+
+**Genres:**
+
+</p>
 
 *Listed Alphabetically*
 
@@ -53,7 +62,11 @@ Netflix_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascien
 11. **Romance**: Romantic Movies + Romantic TV Shows
 12. **Sci-Fi & Fantasy**: Sci-Fi & Fantasy
 
-<p style="font-size: 15px;">**Ratings:**</p>
+<p style="font-size: 15px;">
+
+**Ratings:**
+
+</p>
 
 *Ordered from widest to smallest recommended audience*
 
@@ -86,12 +99,12 @@ Genre_Ratings <- Netflix_data |>
   filter(Genre != "Other") |>
   mutate( rating_ordered = case_when(
       str_detect(rating, "^TV-Y$") ~ "Y",
-      str_detect(rating, "^TV-Y7|TV-7Y-FV$") ~ "Y7 & FV",
-      str_detect(rating, "^G$|^TV-G$") ~ "G",
-      str_detect(rating, "^PG$|^TV-PG$") ~ "PG",
-      str_detect(rating, "^PG-13$|^TV-14$") ~ "PG 13 & TV 14",
-      str_detect(rating, "^R$|^TV-MA$|^NC-17$") ~ "R & MA",
-      str_detect(rating, "^NR$|^UR$|^NA$") | is.na(rating) ~ "Other")) |>
+      str_detect(rating, "^(TV-Y7|TV-7Y-FV)$") ~ "Y7 & FV",
+      str_detect(rating, "^(G$|^TV-G)$") ~ "G",
+      str_detect(rating, "^(PG$|^TV-PG)$") ~ "PG",
+      str_detect(rating, "^(PG-13$|^TV-14)$") ~ "PG 13 & TV 14",
+      str_detect(rating, "^(R$|^TV-MA$|^NC-17)$") ~ "R & MA",
+      str_detect(rating, "^(NR$|^UR$|^NA)$") | is.na(rating) ~ "Other")) |>
   select(title, rating, listed_in, Genre, rating_ordered)
 ```
 
@@ -125,11 +138,19 @@ Ratings_Breakdown |>
     panel.spacing = unit(1, "lines"))
 ```
 
-<p style="font-size: 15px;">**Plot description:**</p>
+<p style="font-size: 15px;">
+
+**Plot description:**
+
+</p>
 
 The above plot displays the distribution of ratings based on the genre of a production that can be found on Netflix. Some genres overwhelmingly fit under a single rating. For example, the Comedy & Drama genre is mostly rated R & MA, with a similar but more marked trend in the Crime genre and Horror & Thriller genre. These three all have one rating category making up 60%+ of their respective genre's production. On the other hand, four genres are particularly balanced in their ratings split. The Children & Family genre, Classic, Cult, & Musicals genre, Reality genre, and the Documentaries genre all have at least three rating categories with a 20%+ share of their respective genre's productions. The other 5 genres fall somewhere in between these two groups.
 
-<p style="font-size: 25px;">**Analysis #2** What is geographical split of production locations for titles added to Netflix in 2019 compared to those added in 2020?</p>
+<p style="font-size: 25px;">
+
+**Analysis #2** What is geographical split of production locations for titles added to Netflix in 2019 compared to those added in 2020?
+
+</p>
 
 ```{r}
 Geo_Data <- Netflix_data |>
@@ -214,11 +235,19 @@ plot_2019
 plot_2020
 ```
 
-<p style="font-size: 15px;">**Plot Description:**</p>
+<p style="font-size: 15px;">
+
+**Plot Description:**
+
+</p>
 
 The above maps display ranges for the number of titles added to Netflix by the country in which they were produced. By hovering your cursor over a country, you can identify the specific number of titles added. The comparison between 2019 and 2020 allows us to see which countries saw more of their productions added to the platform year over year. Focusing on North American countries, we see some interesting changes. While most productions added were in the US during both years, the number actually declined from 2019 to 2020, declining from 926 to 888 titles. Canada saw an increase from 91 to 115 titles. Finally, Mexico saw a decline from 41 to 32 titles. By conducting a broader time series analysis, we could make inferences about how some countries become more favorable production environments over time (which increases the number of titles produced in that country Netflix adds). Another explanation could be that as Netflix attempts to reach wider audiences, they diversify the titles that they offer on their streaming platform. A time series analysis could provide insight on Netflix's changing global content strategy.
 
-<p style="font-size: 25px;">**Analysis #3** What is the average title length based on a production's type (show vs movie)? Do movie titles contain more descriptive phrases (like "The \[X\] of \[Y\]") compared to TV show titles</p>
+<p style="font-size: 25px;">
+
+**Analysis #3** What is the average title length based on a production's type (show vs movie)? Do movie titles contain more descriptive phrases (like "The \[X\] of \[Y\]") compared to TV show titles
+
+</p>
 
 ```{r}
 title_patterns <- Netflix_data |>
@@ -227,10 +256,15 @@ title_patterns <- Netflix_data |>
   summarize(avg_title_length = mean(str_length(title)),
     pct_desc_phrases = mean(has_descriptive_phrase) * 100, total_titles = n()) |>
   mutate("Type" = type, "Avg Title Length" = avg_title_length, "% w/ desc phrases" = pct_desc_phrases, "Total Titles" = total_titles) |>
-  select("Type", "Avg Title Length", "% w/ desc phrases", "Total Titles")
+  select("Type", "Avg Title Length", "% w/ desc phrases", "Total Titles") |>
+  gt()
 title_patterns
 ```
 
-<p style="font-size: 15px;">**Table Description:**</p>
+<p style="font-size: 15px;">
+
+**Table Description:**
+
+</p>
 
 The above table tells us that the average movie title available on Netflix is 1 character longer than the average TV show title. This could be because movie directors follow more descriptive naming conventions. However, this difference is negligible and likely too small to derive any significant conclusions. In addition, we see that \~3.2% of movies have descriptive phrases in their title, compared to 2.1% in shows. This supports the inference that movie directors follow more descriptive naming conventions, which leads to a slightly higher average title length.
