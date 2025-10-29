@@ -37,11 +37,7 @@ shelter_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascien
 
 ```
 
-<p style="font-size: 25px;">
-
-**Research Plan:**
-
-</p>
+<p style="font-size: 25px;">**Research Plan:**</p>
 
 My plan is to process the City of Long Beach animal shelter data from 2017 to 2025 to determine if people tend to adopt dogs more than cats. This is interesting to observe because it could lead us to infer that people have a preference for adopting one pet over the other, which has a plethora of potential explanations rooted in cognitive science.
 
@@ -123,10 +119,6 @@ tibble(null_diffs = null_diffs) |>
   )
 ```
 
-<p style="font-size: 25px;">
-
-**Plot Description:**
-
-</p>
+<p style="font-size: 25px;">**Plot Description:**</p>
 
 The above plot is a visualization of the null distribution obtained from the permutation test based on 1,000 iterations. It shows us that it is extremely unlikely that the observed difference in adoption rates at the Long Beach animal shelter (2.2%) could occur if the null hypothesis were true. Therefore, I reject the null hypothesis because the p-value is nearly equal to 0 so the observed difference is statistically significant. The histogram shows the range of differences we would expect if the null hypothesis were true. This suggests that dogs are adopted more often than cats. Animal shelters could use this insight to investigate why this might be occurring (marketing, pet descriptions, position of pets in the shelter, etc.).
