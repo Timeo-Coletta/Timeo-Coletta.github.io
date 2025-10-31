@@ -230,16 +230,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p style="font-size: 25px;">
-<strong>Research Plan:</strong>
-</p>
+</p><p><strong>Research Plan:</strong></p>
+<p></p>
 <p>My plan is to process the City of Long Beach animal shelter data from 2017 to 2025 to determine if people tend to adopt dogs more than cats. This is interesting to observe because it could lead us to infer that people have a preference for adopting one pet over the other, which has a plethora of potential explanations rooted in cognitive science.</p>
 <p><strong>Q:</strong> <em>Are dogs adopted more often than cats?</em></p>
-<p><strong>Observational unit</strong> - People who adopt animals.</p>
-<p><strong>Statistic (sample proportion)</strong> - Proportion of people who choose to adopt a dog.</p>
-<p><strong>Parameter (population proportion)</strong> - Proportion of all people who choose to adopt a dog.</p>
-<p><strong>Variable</strong> - Choice of dog or cat (categorical).</p>
-<p><strong>Null Hypothesis</strong> - H₀: There is no difference in adoption rates between dogs and cats.</p>
-<p><strong>Alternative Hypothesis</strong> - H₁: Dogs are adopted more often than cats (or vice versa).</p>
+<p><strong>Observational unit</strong> - Individual animals (cats and dogs) in the shelter.</p>
+<p><strong>Statistic (sample proportion)</strong> - Proportion of cats and proportion of dogs in the shelter that are adopted.</p>
+<p><strong>Parameter (population proportion)</strong> - True proportion of cats and true proportion of dogs in the shelter population that are adopted.</p>
+<p><strong>Variables</strong> - Choice of dog or cat (categorical) and Adopted or not (categorical).</p>
+<p><strong>Null Hypothesis</strong> - H₀: There is no difference in the proportion of dogs adopted and cats adopted.</p>
+<p><strong>Alternative Hypothesis</strong> - H₁: The proportion of dogs adopted is greater than the proportion of cats adopted.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -257,23 +257,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>adoption_rates <span class="sc">|&gt;</span> <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="ndwgdgbhez" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ndwgdgbhez table {
+<div id="koaimrpziy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#koaimrpziy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ndwgdgbhez thead, #ndwgdgbhez tbody, #ndwgdgbhez tfoot, #ndwgdgbhez tr, #ndwgdgbhez td, #ndwgdgbhez th {
+#koaimrpziy thead, #koaimrpziy tbody, #koaimrpziy tfoot, #koaimrpziy tr, #koaimrpziy td, #koaimrpziy th {
   border-style: none;
 }
 
-#ndwgdgbhez p {
+#koaimrpziy p {
   margin: 0;
   padding: 0;
 }
 
-#ndwgdgbhez .gt_table {
+#koaimrpziy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -299,12 +299,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#ndwgdgbhez .gt_caption {
+#koaimrpziy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ndwgdgbhez .gt_title {
+#koaimrpziy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -316,7 +316,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#ndwgdgbhez .gt_subtitle {
+#koaimrpziy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -328,7 +328,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#ndwgdgbhez .gt_heading {
+#koaimrpziy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -340,13 +340,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ndwgdgbhez .gt_bottom_border {
+#koaimrpziy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ndwgdgbhez .gt_col_headings {
+#koaimrpziy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -361,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ndwgdgbhez .gt_col_heading {
+#koaimrpziy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -381,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ndwgdgbhez .gt_column_spanner_outer {
+#koaimrpziy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -393,15 +393,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#ndwgdgbhez .gt_column_spanner_outer:first-child {
+#koaimrpziy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ndwgdgbhez .gt_column_spanner_outer:last-child {
+#koaimrpziy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ndwgdgbhez .gt_column_spanner {
+#koaimrpziy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -413,11 +413,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#ndwgdgbhez .gt_spanner_row {
+#koaimrpziy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ndwgdgbhez .gt_group_heading {
+#koaimrpziy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -443,7 +443,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#ndwgdgbhez .gt_empty_group_heading {
+#koaimrpziy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -458,15 +458,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#ndwgdgbhez .gt_from_md > :first-child {
+#koaimrpziy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ndwgdgbhez .gt_from_md > :last-child {
+#koaimrpziy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ndwgdgbhez .gt_row {
+#koaimrpziy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -485,7 +485,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ndwgdgbhez .gt_stub {
+#koaimrpziy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -498,7 +498,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ndwgdgbhez .gt_stub_row_group {
+#koaimrpziy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -512,15 +512,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#ndwgdgbhez .gt_row_group_first td {
+#koaimrpziy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ndwgdgbhez .gt_row_group_first th {
+#koaimrpziy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ndwgdgbhez .gt_summary_row {
+#koaimrpziy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -530,16 +530,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ndwgdgbhez .gt_first_summary_row {
+#koaimrpziy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ndwgdgbhez .gt_first_summary_row.thick {
+#koaimrpziy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ndwgdgbhez .gt_last_summary_row {
+#koaimrpziy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -549,7 +549,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ndwgdgbhez .gt_grand_summary_row {
+#koaimrpziy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -559,7 +559,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ndwgdgbhez .gt_first_grand_summary_row {
+#koaimrpziy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -569,7 +569,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#ndwgdgbhez .gt_last_grand_summary_row_top {
+#koaimrpziy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -579,11 +579,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ndwgdgbhez .gt_striped {
+#koaimrpziy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ndwgdgbhez .gt_table_body {
+#koaimrpziy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -592,7 +592,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ndwgdgbhez .gt_footnotes {
+#koaimrpziy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -606,7 +606,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ndwgdgbhez .gt_footnote {
+#koaimrpziy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -615,7 +615,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ndwgdgbhez .gt_sourcenotes {
+#koaimrpziy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -629,7 +629,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ndwgdgbhez .gt_sourcenote {
+#koaimrpziy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -637,72 +637,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ndwgdgbhez .gt_left {
+#koaimrpziy .gt_left {
   text-align: left;
 }
 
-#ndwgdgbhez .gt_center {
+#koaimrpziy .gt_center {
   text-align: center;
 }
 
-#ndwgdgbhez .gt_right {
+#koaimrpziy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ndwgdgbhez .gt_font_normal {
+#koaimrpziy .gt_font_normal {
   font-weight: normal;
 }
 
-#ndwgdgbhez .gt_font_bold {
+#koaimrpziy .gt_font_bold {
   font-weight: bold;
 }
 
-#ndwgdgbhez .gt_font_italic {
+#koaimrpziy .gt_font_italic {
   font-style: italic;
 }
 
-#ndwgdgbhez .gt_super {
+#koaimrpziy .gt_super {
   font-size: 65%;
 }
 
-#ndwgdgbhez .gt_footnote_marks {
+#koaimrpziy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ndwgdgbhez .gt_asterisk {
+#koaimrpziy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ndwgdgbhez .gt_indent_1 {
+#koaimrpziy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ndwgdgbhez .gt_indent_2 {
+#koaimrpziy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ndwgdgbhez .gt_indent_3 {
+#koaimrpziy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ndwgdgbhez .gt_indent_4 {
+#koaimrpziy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ndwgdgbhez .gt_indent_5 {
+#koaimrpziy .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ndwgdgbhez .katex-display {
+#koaimrpziy .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ndwgdgbhez div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#koaimrpziy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -785,9 +785,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p style="font-size: 25px;">
-<strong>Plot Description:</strong>
-</p>
-<p>The above plot is a visualization of the null distribution obtained from the permutation test based on 1,000 iterations. It shows us that it is extremely unlikely that the observed difference in adoption rates at the Long Beach animal shelter (2.2%) could occur if the null hypothesis were true. Therefore, I reject the null hypothesis because the p-value is nearly equal to 0 so the observed difference is statistically significant. The histogram shows the range of differences we would expect if the null hypothesis were true. This suggests that dogs are adopted more often than cats. Animal shelters could use this insight to investigate why this might be occurring (marketing, pet descriptions, position of pets in the shelter, etc.).</p>
+</p><p><strong>Plot Description:</strong></p>
+<p></p>
+<p>The above plot is a visualization of the null distribution obtained from the permutation test based on 1,000 iterations. It shows us that it is extremely unlikely that the observed difference in adoption rates at the Long Beach animal shelter (2.2%) could occur if the null hypothesis were true. Therefore, I reject the null hypothesis because the p-value is nearly equal to 0 so the observed difference is statistically significant. The histogram shows the range of differences we would expect if the null hypothesis were true. This suggests that dogs are more likely to be adopted than cats in shelters. Animal shelters could use this insight to investigate why this might be occurring (marketing, pet descriptions, position of pets in the shelter, etc.).</p>
 
 
 
