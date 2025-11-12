@@ -9,7 +9,7 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-      - text: "Data Viz"
+      - text: "Data Science Projects"
         menu: 
          - text: "Frogs in Australia"
            href: 09-2 Frogs.html
@@ -21,8 +21,9 @@ website:
            href: 10-05 Netflix.html
          - text: "Adoptions in Long Beach"
            href: 10-28 Animal Shelter.html
-
-      
+         - text: "Poorly Anonymized Data"
+           href: 11-11 Ethics - Poorly Anonymized Data.html
+  
       
 format:
   html:

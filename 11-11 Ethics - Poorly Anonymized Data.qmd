@@ -1,0 +1,36 @@
+---
+title: "11-11 Poorly Anonymized Data"
+description: |
+  With the 2014 release of data on 173 million New York City cab rides, the importance of the ethics of anonymity were highlighted when the city government failed to protect drivers' identitites. Here, I identify the ethical risks that arise with poorly anonymized data.
+  
+author: "Timeo Coletta"
+date: November 11, 2025
+format: html
+editor: visual
+---
+
+**Article Sources:**
+
+Johnston, Anna. "Bradley Cooper’s Taxi Ride: A Lesson in Privacy Risk." Helios Salinger, 19 April 2015, <a href = "https://www.heliossalinger.com.au/2015/04/19/bradley-coopers-taxi-ride-a-lesson-in-privacy-risk/" target = "_blank" >https://www.heliossalinger.com.au/2015/04/19/bradley-coopers-taxi-ride-a-lesson-in-privacy-risk/</a>
+
+Goodin, Dan. “Poorly Anonymized Logs Reveal NYC Cab Drivers’ Detailed Whereabouts.” Ars Technica, 23 June 2014, <a href = "https://arstechnica.com/tech-policy/2014/06/poorly-anonymized-logs-reveal-nyc-cab-drivers-detailed-whereabouts/" target = "_blank" > https://arstechnica.com/tech-policy/2014/06/poorly-anonymized-logs-reveal-nyc-cab-drivers-detailed-whereabouts/</a>
+
+### **Analysis of the TLC Taxi Data's Ethical Controversy**
+
+-   Were the data made publicly available? Why? How? On what platform?
+
+-   What was the consent structure for recruiting participants?
+
+In 2014, the New York City Taxi & Limousine commission released, under FOI, data recorded by taxis' GPS systems, with the data set covering over 173 million individual trips taken during 2013. "Under FOI" means government records are being made public in response to a request under the Freedom of Information Act, so the first element of importance is that this information was accessible to anyone. The data set was published on the NYC government website. According to Johnston, each trip record in the data included the "date, location and time of the pickup and drop-off, the fare paid, and any recorded tip...it also included a unique code for each taxi and taxi driver". The taxi drivers and passengers did not explicitly consent to the release of ride data by the TLC in 2014, so the government attempted to make their identities anonymous in order to avoid them from being identified.
+
+-   Is the data identifiable? Is anonymity guaranteed?
+
+Unfortunately, city officials failed to guarantee anonymity. Goodin explains that officials used cryptographic hashes to obscure drivers' hack license numbers and medallion numbers, using the MD5 algorithm to preserve the privacy of individual drivers. However, drivers' hack and medallion numbers are structured predictably (taxi license numbers are always 6 or 7 digit numbers that start with a 5) so there were only 2 million possible license combinations. Goodin states that "Software developer Vijay...in less than two hours...had completely de-anonymized all 173 million entries". City officials poorly anonymized the data by choosing an encryption option that was not appropriate for the data structure since license and medallion numbers come in predictable patterns. Information on which driver took every single trip was now identifiable, as were the aforementioned details of said trips. From another angle, Johnston mentions that "even if TLC had removed all the details about the driver and the taxi, the geolocation data alone could potentially identify taxi passengers".
+
+-   Is the data being used in unintended ways to the original study?
+
+According to Johnston, the data was initially meant to be used for "urban transport and planning research". However, the poor anonymisation of drivers' identities meant that anyone could now figure out in less than 2 hours which driver drove every single trip in the data set, and subsequently calculate drivers' income, infer where they live, know how many miles they drove, or find out where they were at any given time. In addition, taxi passengers could be identified based on geolocation regardless of if the data was anonymous. Johnston points out that when Anthony Tockar googled images of celebrities getting in or out of taxis in 2013 coupled with data from celebrity gossip blogs, he was able to determine where and when celebrities got into taxis. Given this information, he was able to identify where Bradley Cooper went and how much he paid for each ride, which led to public backlash for his poor track record with tipping. Cooper's PR team defended him by arguing that cash tips were not recorded in the data set - but by that point, the damage had been done and his privacy was infringed on.
+
+-   Who benefits? Who is neglected or harmed?
+
+In sum, poor data anonymization made possible the identification of taxi drivers' ride information and the identification of passengers based on geolocation data alone. While the Bradley Cooper example reflects a relatively minor breach of privacy, Johnston remarks that the same process could be used to easily identify the start or end-point for each taxi trip to or from an abortion clinic, a drug counselling service, or the home address of an investigative journalist or suspected whistle-blower. The ethical violations, though not intentional, reflect neglect of personal privacy for both taxi drivers and passengers, serving the interest of surveillance. The people who benefit are malintentioned individuals intending to track others' movement in New York City, while harming the privacy of drivers and passengers alike. While data transparency on taxi movements and the intent to de-identify driver data were well-meaning, the consequences of poorly anonymized data end up causing more harm than good. The poorly anonymized data is a violation of the data values and principles manifesto, especially the principle to "protect the privacy and security of individuals represented in our data." This case reflects broader themes in Data Feminism: data science tends to be prioritized for transparency and efficiency but often overlooks the populations harmed in the process.
