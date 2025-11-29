@@ -25,7 +25,7 @@ Pierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, 
 
 ## Introduction
 
-In my analysis, I work with tables containing data on traffic stops made by state patrols in Rhode Island, North Carolina, and Massachusetts. Specifically, I examine whether there are differences across states in the proportion of arrests made during traffic stops with speeding as the stated reason for the stop. I consider the time period from 2007 to 2015, as the data tables overlap over this time frame. I have hidden the output of the queries below, as they are useful if one wants to visualize the contents of each data table but don't involve any important wrangling. I hypothesize that Rhode Island has a higher proportion of arrests made for speeding stops than the two other states given its higher population density, which I infer makes for stricter speeding laws. I expect the difference to be smaller between Rhode Island and Massachusetts, given that the difference in their population density is very small.
+In my analysis, I work with tables containing data on traffic stops made by state patrols in Rhode Island, North Carolina, and Massachusetts. Specifically, I examine whether there are differences across states in the proportion of arrests made during traffic stops with speeding as the stated reason for the stop. I consider the time period from 2007 to 2015, as the data tables overlap over this time frame. I hypothesize that Rhode Island has a higher proportion of arrests made for speeding stops than the two other states given its higher population density, which I infer makes for stricter speeding laws. I expect the difference to be smaller between Rhode Island and Massachusetts, given that the difference in their population density is very small.
 
 ```{r}
 #load libraries
@@ -52,38 +52,38 @@ con_traffic <- DBI::dbConnect(
 )
 ```
 
-```{sql connection = con_traffic, results='hide'}
+```{sql connection = con_traffic, include=FALSE}
 SHOW TABLES;
 ```
 
-```{sql connection = con_traffic, results='hide'}
+```{sql connection = con_traffic, include=FALSE}
 SELECT DISTINCT reason_for_stop
 FROM ri_statewide_2020_04_01
 ```
 
-```{sql connection = con_traffic, results='hide'}
+```{sql connection = con_traffic, include=FALSE}
 SELECT * 
 FROM ri_statewide_2020_04_01	 
 LIMIT 0, 10;
 ```
 
-```{sql connection = con_traffic, results='hide'}
+```{sql connection = con_traffic, include=FALSE}
 SELECT DISTINCT reason_for_stop
 FROM nc_statewide_2020_04_01;
 ```
 
-```{sql connection = con_traffic, results='hide'}
+```{sql connection = con_traffic, include=FALSE}
 SELECT * 
 FROM nc_statewide_2020_04_01 
 LIMIT 0, 10;
 ```
 
-```{sql connection = con_traffic, results='hide'}
+```{sql connection = con_traffic, include=FALSE}
 SELECT DISTINCT reason_for_stop
 FROM ma_statewide_2020_04_01;
 ```
 
-```{sql connection = con_traffic, results='hide'}
+```{sql connection = con_traffic, include=FALSE}
 SELECT * 
 FROM ma_statewide_2020_04_01 
 LIMIT 0, 10;
