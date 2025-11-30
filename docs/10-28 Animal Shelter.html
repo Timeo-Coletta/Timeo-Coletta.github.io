@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Timeo Coletta">
-<meta name="dcterms.date" content="2025-10-05">
-<meta name="description" content="Analysis of traffic stops data compiled by the Stanford Open Policing Project.Currently, a comprehensive, national repository detailing interactions between police and the public doesn’t exist. That’s why the Stanford Open Policing Project is collecting and standardizing data on vehicle and pedestrian stops from law enforcement departments across the country — and they’re making that information freely available. they’ve already gathered over 200 million records from dozens of state and local police departments across the country.">
+<meta name="dcterms.date" content="2025-10-28">
+<meta name="description" content="Analysis of Long Beach animal shelter data from TidyTuesday.The dataset comes from the City of Long Beach Animal Care Services collected from 2017 to 2025, can be accessed via the {animalshelter} R package. Credit to to Lydia Gibson for curating the data.">
 
-<title>12-1 Speeding Stops</title>
+<title>10-28 Animal Shelter</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -177,37 +177,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">Data Wrangling</a></li>
-  <li><a href="#plot-1" id="toc-plot-1" class="nav-link" data-scroll-target="#plot-1">Plot #1</a></li>
-  <li><a href="#plot-2" id="toc-plot-2" class="nav-link" data-scroll-target="#plot-2">Plot #2</a></li>
-  <li><a href="#plot-3" id="toc-plot-3" class="nav-link" data-scroll-target="#plot-3">Plot #3</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">12-1 Speeding Stops</h1>
+<h1 class="title">10-28 Animal Shelter</h1>
 </div>
 
 <div>
   <div class="description">
-    <p>Analysis of traffic stops data compiled by the Stanford Open Policing Project.</p>
-    <p>Currently, a comprehensive, national repository detailing interactions between police and the public doesn’t exist. That’s why the Stanford Open Policing Project is collecting and standardizing data on vehicle and pedestrian stops from law enforcement departments across the country — and they’re making that information freely available. they’ve already gathered over 200 million records from dozens of state and local police departments across the country.</p>
+    <p>Analysis of Long Beach animal shelter data from TidyTuesday.</p>
+    <p>The dataset comes from the City of Long Beach Animal Care Services collected from 2017 to 2025, can be accessed via the {animalshelter} R package. Credit to to Lydia Gibson for curating the data.</p>
   </div>
 </div>
 
 
-<div class="quarto-title-meta column-page-left">
+<div class="quarto-title-meta column-page">
 
     <div>
     <div class="quarto-title-meta-heading">Author</div>
@@ -219,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 5, 2025</p>
+      <p class="date">October 28, 2025</p>
     </div>
   </div>
   
@@ -232,110 +221,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><strong>Sources linked:</strong></p>
-<p>Pierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, Amy Shoemaker, Vignesh Ramachandran, et al.&nbsp;2020.&nbsp;“A Large-Scale Analysis of Racial Disparities in Police Stops Across the&nbsp;United States.”&nbsp;<em>Nature Human Behaviour</em>, 1–10 <a href="https://5harad.com/papers/100M-stops.pdf" target="_blank">Paper Link </a></p>
-<p><a href="https://openpolicing.stanford.edu/data/" target="_blank">Data Link</a></p>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In my analysis, I work with tables containing data on traffic stops made by state patrols in Rhode Island, North Carolina, and Massachusetts. Specifically, I examine whether there are differences across states in the proportion of arrests made during traffic stops with speeding as the stated reason for the stop. I consider the time period from 2007 to 2015, as the data tables overlap over this time frame. I hypothesize that Rhode Island has a higher proportion of arrests made for speeding stops than the two other states given its higher population density, which I infer makes for stricter speeding laws. I expect the difference to be smaller between Rhode Island and Massachusetts, given that the difference in their population density is very small.</p>
+<p><a href="https://data.longbeach.gov/explore/dataset/animal-shelter-intakes-and-outcomes/information/?disjunctive.animal_type&amp;disjunctive.intake_cond&amp;disjunctive.intake_type&amp;disjunctive.reason&amp;disjunctive.outcome_type&amp;disjunctive.sex&amp;disjunctive.outcome_subtype&amp;disjunctive.intake_is_dead&amp;disjunctive.outcome_is_dead" target="_blank"> City of Long Beach Data </a></p>
+<p><a href="https://github.com/rfordatascience/tidytuesday/tree/main/data/2025/2025-03-04" target="_blank"> Tidy Tuesday Data</a></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RMariaDB)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>shelter_data <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-03-04/longbeach.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p style="font-size: 25px;">
+</p><p><strong>Research Plan:</strong></p>
+<p></p>
+<p>My plan is to process the City of Long Beach animal shelter data from 2017 to 2025 to determine if people tend to adopt dogs more than cats. This is interesting to observe because it could lead us to infer that people have a preference for adopting one pet over the other, which has a plethora of potential explanations rooted in cognitive science.</p>
+<p><strong>Q:</strong> <em>Are dogs adopted more often than cats?</em></p>
+<p><strong>Observational unit</strong> - Individual animals (cats and dogs) in the shelter.</p>
+<p><strong>Statistic (sample proportion)</strong> - Proportion of cats and proportion of dogs in the shelter that are adopted.</p>
+<p><strong>Parameter (population proportion)</strong> - True proportion of cats and true proportion of dogs in the shelter population that are adopted.</p>
+<p><strong>Variables</strong> - Choice of dog or cat (categorical) and Adopted or not (categorical).</p>
+<p><strong>Null Hypothesis</strong> - H₀: There is no difference in the proportion of dogs adopted and cats adopted.</p>
+<p><strong>Alternative Hypothesis</strong> - H₁: The proportion of dogs adopted is greater than the proportion of cats adopted.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set up SQL connection</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>con_traffic <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  RMariaDB<span class="sc">::</span><span class="fu">MariaDB</span>(),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">dbname =</span> <span class="st">"traffic"</span>,</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>adoption_rates <span class="ot">&lt;-</span> shelter_data <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(animal_type <span class="sc">==</span> <span class="st">"dog"</span> <span class="sc">|</span> animal_type <span class="sc">==</span> <span class="st">"cat"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Species =</span> animal_type) <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">adopted =</span> <span class="fu">if_else</span>(outcome_type <span class="sc">==</span> <span class="st">"adoption"</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">"Adoption Rate"</span> <span class="ot">=</span> <span class="fu">mean</span>(adopted, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">host =</span> <span class="fu">Sys.getenv</span>(<span class="st">"TRAFFIC_HOST"</span>),</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">user =</span> <span class="fu">Sys.getenv</span>(<span class="st">"TRAFFIC_USER"</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>observed_diff <span class="ot">&lt;-</span> adoption_rates <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">"Adoption Rate"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diff</span>()</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">password =</span> <span class="fu">Sys.getenv</span>(<span class="st">"TRAFFIC_PWD"</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
-<section id="data-wrangling" class="level2">
-<h2 class="anchored" data-anchor-id="data-wrangling">Data Wrangling</h2>
-<p>In the SQL query below, I calculate the yearly arrest percentages for traffic stops due to speeding in each state and join the results to create a data table with state-year pair observations. Storing the output table as an object in R allows me to use it later on for data visualization and statistical tests. Below is a preview of what the table looks like.</p>
-<div class="cell" data-output.var="stops_table">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'RI'</span> <span class="kw">AS</span> state,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">YEAR</span>(`date`) <span class="kw">AS</span> <span class="dt">year</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> total_stops,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(arrest_made) <span class="kw">AS</span> arrests,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">SUM</span>(arrest_made) <span class="op">/</span> <span class="fu">COUNT</span>(<span class="op">*</span>)) <span class="op">*</span> <span class="dv">100</span> <span class="kw">AS</span> arrest_percentage</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> ri_statewide_2020_04_01</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> reason_for_stop <span class="op">=</span> <span class="st">'Speeding'</span> </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">AND</span> <span class="dt">YEAR</span>(`date`) <span class="kw">BETWEEN</span> <span class="dv">2007</span> <span class="kw">AND</span> <span class="dv">2015</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">YEAR</span>(`date`)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="kw">UNION</span> <span class="kw">ALL</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">'NC'</span> <span class="kw">AS</span> state,</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">YEAR</span>(`date`) <span class="kw">AS</span> <span class="dt">year</span>,</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> total_stops,</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(arrest_made) <span class="kw">AS</span> arrests,</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">SUM</span>(arrest_made) <span class="op">/</span> <span class="fu">COUNT</span>(<span class="op">*</span>)) <span class="op">*</span> <span class="dv">100</span> <span class="kw">AS</span> arrest_percentage</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> nc_statewide_2020_04_01</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> reason_for_stop <span class="op">=</span> <span class="st">'Speed Limit Violation'</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="kw">AND</span> <span class="dt">YEAR</span>(`date`) <span class="kw">BETWEEN</span> <span class="dv">2007</span> <span class="kw">AND</span> <span class="dv">2015</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">YEAR</span>(`date`)</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="kw">UNION</span> <span class="kw">ALL</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">'MA'</span> <span class="kw">AS</span> state,</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="dt">YEAR</span>(STR_TO_DATE(`date`, <span class="st">'%Y-%m-%d'</span>)) <span class="kw">AS</span> <span class="dt">year</span>,</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> total_stops,</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(arrest_made) <span class="kw">AS</span> arrests,</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">SUM</span>(arrest_made) <span class="op">/</span> <span class="fu">COUNT</span>(<span class="op">*</span>)) <span class="op">*</span> <span class="dv">100</span> <span class="kw">AS</span> arrest_percentage</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> ma_statewide_2020_04_01</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> reason_for_stop <span class="op">=</span> <span class="st">'Speed'</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="kw">AND</span> <span class="dt">YEAR</span>(`date`) <span class="kw">BETWEEN</span> <span class="dv">2007</span> <span class="kw">AND</span> <span class="dv">2015</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">YEAR</span>(STR_TO_DATE(`date`, <span class="st">'%Y-%m-%d'</span>))</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> state, <span class="dt">year</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stops_table) <span class="sc">|&gt;</span> <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>adoption_rates <span class="sc">|&gt;</span> <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="xesfkqnmad" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xesfkqnmad table {
+<div id="canvbimgql" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#canvbimgql table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xesfkqnmad thead, #xesfkqnmad tbody, #xesfkqnmad tfoot, #xesfkqnmad tr, #xesfkqnmad td, #xesfkqnmad th {
+#canvbimgql thead, #canvbimgql tbody, #canvbimgql tfoot, #canvbimgql tr, #canvbimgql td, #canvbimgql th {
   border-style: none;
 }
 
-#xesfkqnmad p {
+#canvbimgql p {
   margin: 0;
   padding: 0;
 }
 
-#xesfkqnmad .gt_table {
+#canvbimgql .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -361,12 +307,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#xesfkqnmad .gt_caption {
+#canvbimgql .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xesfkqnmad .gt_title {
+#canvbimgql .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -378,7 +324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#xesfkqnmad .gt_subtitle {
+#canvbimgql .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -390,7 +336,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#xesfkqnmad .gt_heading {
+#canvbimgql .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -402,13 +348,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#xesfkqnmad .gt_bottom_border {
+#canvbimgql .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xesfkqnmad .gt_col_headings {
+#canvbimgql .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -423,7 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#xesfkqnmad .gt_col_heading {
+#canvbimgql .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -443,7 +389,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#xesfkqnmad .gt_column_spanner_outer {
+#canvbimgql .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -455,15 +401,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#xesfkqnmad .gt_column_spanner_outer:first-child {
+#canvbimgql .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xesfkqnmad .gt_column_spanner_outer:last-child {
+#canvbimgql .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xesfkqnmad .gt_column_spanner {
+#canvbimgql .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -475,11 +421,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#xesfkqnmad .gt_spanner_row {
+#canvbimgql .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xesfkqnmad .gt_group_heading {
+#canvbimgql .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -505,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#xesfkqnmad .gt_empty_group_heading {
+#canvbimgql .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -520,15 +466,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#xesfkqnmad .gt_from_md > :first-child {
+#canvbimgql .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xesfkqnmad .gt_from_md > :last-child {
+#canvbimgql .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xesfkqnmad .gt_row {
+#canvbimgql .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -547,7 +493,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#xesfkqnmad .gt_stub {
+#canvbimgql .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -560,7 +506,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#xesfkqnmad .gt_stub_row_group {
+#canvbimgql .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -574,15 +520,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#xesfkqnmad .gt_row_group_first td {
+#canvbimgql .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xesfkqnmad .gt_row_group_first th {
+#canvbimgql .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xesfkqnmad .gt_summary_row {
+#canvbimgql .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -592,16 +538,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#xesfkqnmad .gt_first_summary_row {
+#canvbimgql .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xesfkqnmad .gt_first_summary_row.thick {
+#canvbimgql .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xesfkqnmad .gt_last_summary_row {
+#canvbimgql .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -611,7 +557,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#xesfkqnmad .gt_grand_summary_row {
+#canvbimgql .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -621,7 +567,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#xesfkqnmad .gt_first_grand_summary_row {
+#canvbimgql .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -631,7 +577,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#xesfkqnmad .gt_last_grand_summary_row_top {
+#canvbimgql .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -641,11 +587,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#xesfkqnmad .gt_striped {
+#canvbimgql .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xesfkqnmad .gt_table_body {
+#canvbimgql .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -654,7 +600,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#xesfkqnmad .gt_footnotes {
+#canvbimgql .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -668,7 +614,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#xesfkqnmad .gt_footnote {
+#canvbimgql .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -677,7 +623,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#xesfkqnmad .gt_sourcenotes {
+#canvbimgql .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -691,7 +637,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#xesfkqnmad .gt_sourcenote {
+#canvbimgql .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -699,72 +645,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#xesfkqnmad .gt_left {
+#canvbimgql .gt_left {
   text-align: left;
 }
 
-#xesfkqnmad .gt_center {
+#canvbimgql .gt_center {
   text-align: center;
 }
 
-#xesfkqnmad .gt_right {
+#canvbimgql .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xesfkqnmad .gt_font_normal {
+#canvbimgql .gt_font_normal {
   font-weight: normal;
 }
 
-#xesfkqnmad .gt_font_bold {
+#canvbimgql .gt_font_bold {
   font-weight: bold;
 }
 
-#xesfkqnmad .gt_font_italic {
+#canvbimgql .gt_font_italic {
   font-style: italic;
 }
 
-#xesfkqnmad .gt_super {
+#canvbimgql .gt_super {
   font-size: 65%;
 }
 
-#xesfkqnmad .gt_footnote_marks {
+#canvbimgql .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xesfkqnmad .gt_asterisk {
+#canvbimgql .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xesfkqnmad .gt_indent_1 {
+#canvbimgql .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xesfkqnmad .gt_indent_2 {
+#canvbimgql .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xesfkqnmad .gt_indent_3 {
+#canvbimgql .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xesfkqnmad .gt_indent_4 {
+#canvbimgql .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xesfkqnmad .gt_indent_5 {
+#canvbimgql .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xesfkqnmad .katex-display {
+#canvbimgql .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xesfkqnmad div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#canvbimgql div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -772,193 +718,86 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
-<th id="state" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">state</th>
-<th id="year" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">year</th>
-<th id="total_stops" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">total_stops</th>
-<th id="arrests" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">arrests</th>
-<th id="arrest_percentage" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">arrest_percentage</th>
+<th id="Species" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Species</th>
+<th id="Adoption-Rate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Adoption Rate</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="state">MA</td>
-<td class="gt_row gt_center" headers="year">2007</td>
-<td class="gt_row gt_center" headers="total_stops">107856</td>
-<td class="gt_row gt_right" headers="arrests">1600</td>
-<td class="gt_row gt_right" headers="arrest_percentage">1.483459</td>
+<td class="gt_row gt_left" headers="Species">cat</td>
+<td class="gt_row gt_right" headers="Adoption Rate">0.2444523</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="state">MA</td>
-<td class="gt_row gt_center" headers="year">2008</td>
-<td class="gt_row gt_center" headers="total_stops">213408</td>
-<td class="gt_row gt_right" headers="arrests">3082</td>
-<td class="gt_row gt_right" headers="arrest_percentage">1.444182</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="state">MA</td>
-<td class="gt_row gt_center" headers="year">2009</td>
-<td class="gt_row gt_center" headers="total_stops">199617</td>
-<td class="gt_row gt_right" headers="arrests">2322</td>
-<td class="gt_row gt_right" headers="arrest_percentage">1.163228</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="state">MA</td>
-<td class="gt_row gt_center" headers="year">2010</td>
-<td class="gt_row gt_center" headers="total_stops">180246</td>
-<td class="gt_row gt_right" headers="arrests">2035</td>
-<td class="gt_row gt_right" headers="arrest_percentage">1.129013</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="state">MA</td>
-<td class="gt_row gt_center" headers="year">2011</td>
-<td class="gt_row gt_center" headers="total_stops">155302</td>
-<td class="gt_row gt_right" headers="arrests">1566</td>
-<td class="gt_row gt_right" headers="arrest_percentage">1.008358</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="state">MA</td>
-<td class="gt_row gt_center" headers="year">2012</td>
-<td class="gt_row gt_center" headers="total_stops">178773</td>
-<td class="gt_row gt_right" headers="arrests">2065</td>
-<td class="gt_row gt_right" headers="arrest_percentage">1.155096</td>
+<td class="gt_row gt_left" headers="Species">dog</td>
+<td class="gt_row gt_right" headers="Adoption Rate">0.2661265</td>
 </tr>
 </tbody>
 </table>
 
 </div>
 </div>
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbDisconnect</span>(con_traffic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
-</section>
-<section id="plot-1" class="level2">
-<h2 class="anchored" data-anchor-id="plot-1">Plot #1</h2>
+<p>The above table highlights the observed proportions of adopted dogs and adopted cats. Approximately 24.4% of cats were adopted at the shelter, compared to 26.6% of dogs. This means the observed difference sits at 2.17%, meaning people in the sample adopted dogs at a rate 2.17% higher than the rate at which they adopted cats. Now, I will test whether this difference is statistically significant by conducting a permutation test over 1,000 iterations.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>state_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"RI"</span> <span class="ot">=</span> <span class="st">"#E41A1C"</span>, <span class="st">"NC"</span> <span class="ot">=</span> <span class="st">"#377EB8"</span>, <span class="st">"MA"</span> <span class="ot">=</span> <span class="st">"#4DAF4A"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stops_table, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> arrest_percentage, <span class="at">color =</span> state, <span class="at">group =</span> state)) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> state_colors) <span class="sc">+</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Proportion of Arrests for Speeding Stops by State Over Time"</span>,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Arrest Percentage (%)"</span>,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"State"</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>not_summarized <span class="ot">&lt;-</span> shelter_data <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(animal_type <span class="sc">==</span> <span class="st">"dog"</span> <span class="sc">|</span> animal_type <span class="sc">==</span> <span class="st">"cat"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Species =</span> animal_type) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">adopted =</span> <span class="fu">if_else</span>(outcome_type <span class="sc">==</span> <span class="st">"adoption"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>permutation_test <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">adopted =</span> <span class="fu">sample</span>(adopted, <span class="at">replace =</span> <span class="cn">FALSE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Species) <span class="sc">|&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">adopt_rate =</span> <span class="fu">mean</span>(adopted, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(Species) <span class="sc">|&gt;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(adopt_rate) <span class="sc">|&gt;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">diff</span>()</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>null_diffs <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>, <span class="sc">~</span> <span class="fu">permutation_test</span>(not_summarized))</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(null_diffs) <span class="sc">&gt;=</span> <span class="fu">abs</span>(observed_diff))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The <code>permutation_test</code> function:</p>
+<ol type="1">
+<li><p>Takes the original dataset.</p></li>
+<li><p>Randomly shuffles the <code>adopted</code> column (breaking any link between species and adoption status).</p></li>
+<li><p>Recalculates the adoption rates for dogs and cats.</p></li>
+<li><p>Returns the difference in adoption rates (<code>dog_rate - cat_rate</code>) for that shuffled dataset.</p></li>
+</ol>
+<p>By running this function 1,000 times using <code>map_dbl()</code>, I generate a distribution of differences that would occur if the null hypothesis were true.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">null_diffs =</span> null_diffs) <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> null_diffs)) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> observed_diff, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Null Distribution of Adoption Rate Differences (Dog - Cat)"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"1000 Iterations - "</span>, <span class="st">"Observed difference:"</span>, <span class="fu">round</span>(observed_diff, <span class="dv">3</span>), <span class="st">"| p-value:"</span>, p_value),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Difference in Adoption Rate"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="12-1-Speeding-Stops_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="10-28-Animal-Shelter_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The above plot portrays the time series trend of arrest percentages for speeding-induced traffic stops in each respective state. It is interesting to note that North Carolina has higher consistency in arrest percentage over time than the other two states, who both trend downwards. This could signal that, in MA &amp; RI, certain policies were enacted that reduced the chance of a speeding offense leading to arrest, such as more lenient regulations. North Carolina might have already had lenient regulations on speeding, so the proportion of arrests remains at a low point (whereas MA &amp; RI could have been in transitional policy stages).</p>
-</section>
-<section id="plot-2" class="level2">
-<h2 class="anchored" data-anchor-id="plot-2">Plot #2</h2>
-<p><strong>Test: RI vs MA</strong></p>
-<ul>
-<li><p><strong>Null hypothesis (H₀)</strong>: RI’s mean arrest percentage is less than or equal to MA’s</p></li>
-<li><p><strong>Alternative hypothesis (H₁)</strong>: RI’s mean arrest percentage is greater than MA’s</p></li>
-<li><p>Testing whether Rhode Island has a statistically significantly <em>higher</em> average arrest percentage for speeding stops compared to Massachusetts over the 2007-2015 period</p></li>
-</ul>
-<div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ri_arrests <span class="ot">&lt;-</span> stops_table <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"RI"</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(arrest_percentage)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>   ma_arrests <span class="ot">&lt;-</span> stops_table <span class="sc">|&gt;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"MA"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>     <span class="fu">pull</span>(arrest_percentage)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>   nc_arrests <span class="ot">&lt;-</span> stops_table <span class="sc">|&gt;</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>     <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"NC"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>     <span class="fu">pull</span>(arrest_percentage)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>p_ri_ma <span class="ot">&lt;-</span> <span class="fu">t.test</span>(ri_arrests, ma_arrests, <span class="at">alternative =</span> <span class="st">"greater"</span>)<span class="sc">$</span>p.value</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>p_ri_nc <span class="ot">&lt;-</span> <span class="fu">t.test</span>(ri_arrests, nc_arrests, <span class="at">alternative =</span> <span class="st">"greater"</span>)<span class="sc">$</span>p.value</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>y_min <span class="ot">&lt;-</span> <span class="fl">0.70</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>y_max <span class="ot">&lt;-</span> <span class="fl">1.50</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>stops_table <span class="sc">|&gt;</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"RI"</span>, <span class="st">"MA"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> state, <span class="at">y =</span> arrest_percentage, <span class="at">fill =</span> state)) <span class="sc">+</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> y_max <span class="sc">*</span> <span class="fl">0.95</span>, </span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"p = "</span>, <span class="fu">round</span>(p_ri_ma, <span class="dv">4</span>)), </span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"RI vs MA: Arrest Percentages for Speeding Stops (2007-2015)"</span>,</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"State"</span>,</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Arrest Percentage (%)"</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"MA"</span> <span class="ot">=</span> <span class="st">"#4DAF4A"</span>, <span class="st">"RI"</span> <span class="ot">=</span> <span class="st">"#E41A1C"</span>)) <span class="sc">+</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(y_min, y_max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="12-1-Speeding-Stops_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The above plot showcases the difference in arrest percentages between Rhode Island and Massachusetts, with RI higher than MA. However, the p-value is greater than 0.05 which means the difference is not statistically significant, which I infer is because the population densities of both states are extremely similar (so I’d assume they have stricter regulations around speeding). We cannot reject the null hypothesis (confidence interval of 95%).</p>
-</section>
-<section id="plot-3" class="level2">
-<h2 class="anchored" data-anchor-id="plot-3">Plot #3</h2>
-<p><strong>Test: RI vs NC</strong></p>
-<ul>
-<li><p><strong>Null hypothesis (H₀)</strong>: RI’s mean arrest percentage is less than or equal to NC’s</p></li>
-<li><p><strong>Alternative hypothesis (H₁)</strong>: RI’s mean arrest percentage is greater than NC’s</p></li>
-<li><p>Testing whether Rhode Island has a statistically significantly <em>higher</em> average arrest percentage for speeding stops compared to North Carolina over the 2007-2015 period</p></li>
-</ul>
-<div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>stops_table <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"RI"</span>, <span class="st">"NC"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> state, <span class="at">y =</span> arrest_percentage, <span class="at">fill =</span> state)) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> y_max <span class="sc">*</span> <span class="fl">0.95</span>, </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"p = "</span>, <span class="fu">round</span>(p_ri_nc, <span class="dv">4</span>)), </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"RI vs NC: Arrest Percentages for Speeding Stops (2007-2015)"</span>,</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"State"</span>,</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Arrest Percentage (%)"</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"NC"</span> <span class="ot">=</span> <span class="st">"#377EB8"</span>, <span class="st">"RI"</span> <span class="ot">=</span> <span class="st">"#E41A1C"</span>)) <span class="sc">+</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(y_min, y_max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="12-1-Speeding-Stops_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Based on the above plot, we can see that Rhode Island has a statistically significant (p &lt; 0.05) higher proportion of arrests for speeding-induced traffic stops than North Carolina. Therefore, we reject the null hypothesis. It is possible that North Carolina’s much smaller population density (around 1/5) has prompted less serious penalties for speeding in the state, but I can only infer.</p>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>In summary, I was able to reject the null hypothesis in one of the two tests conducted, with the difference between RI and NC being statistically significant. Although analysis across a larger group of high density vs low density states would a beneficial area of exploration, it is difficult to conduct using this set of databases because state patrols have different ways of classifying reasons for stops. In fact, for some states (not included in this analysis) there is no clear “speeding” category, and the stated reason is simply moving violation (which encompasses a wide range of reasons).</p>
+<p style="font-size: 25px;">
+</p><p><strong>Plot Description:</strong></p>
+<p></p>
+<p>The above plot is a visualization of the null distribution obtained from the permutation test based on 1,000 iterations. It shows us that it is extremely unlikely that the observed difference in adoption rates at the Long Beach animal shelter (2.2%) could occur if the null hypothesis were true. Therefore, I reject the null hypothesis because the p-value is nearly equal to 0 so the observed difference is statistically significant. The histogram shows the range of differences we would expect if the null hypothesis were true. This suggests that dogs are more likely to be adopted than cats in shelters. Animal shelters could use this insight to investigate why this might be occurring (marketing, pet descriptions, position of pets in the shelter, etc.).</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
