@@ -25,7 +25,8 @@ website:
            href: 11-11 Ethics - Poorly Anonymized Data.html
          - text: "Speeding Stops"
            href: 12-1 Speeding Stops.html
-  
+         - text: "Data Applied to Economics"
+           href: Data Applied to Economics.html
       
 format:
   html:

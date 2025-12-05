@@ -1,6 +1,6 @@
 ---
 title: "Timeo Coletta"
-image: HeadshotDS2.JPG
+image: Images/HeadshotDS2.JPG
 toc: false
 about: 
   template: jolla
