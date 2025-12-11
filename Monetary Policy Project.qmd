@@ -3,7 +3,7 @@ title: "Monetary Policy Project"
 description: |
 
      Below is the embedded PDF of a Macroeconomic Theory research project on monetary policy in the BEAC and BCEAO. The source code for the visualizations and statistical tests is described in detail below.
-authors: "Timeo Coletta, Jalen DeLoney, Shawn Martinez, Joseph Morco"
+author: "Timeo Coletta, Jalen DeLoney, Shawn Martinez, Joseph Morco"
 date: May 14, 2025
 format: 
   html:
