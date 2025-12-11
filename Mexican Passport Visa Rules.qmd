@@ -1,0 +1,105 @@
+---
+title: "Mexican Passport Visa Rules"
+description: |
+  Analysis of the Henley Passport Index data from TidyTuesday
+  
+  Data from the Henlet Passport Index API. The Henley Passport Index is produced by Henley & Partners and captures the number of countries to which travelers in possession of each passport in the world may enter visa free.
+author: "Timeo Coletta"
+date: September 9, 2025
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: visual
+execute:
+  warning: false
+  message: false
+---
+
+### Introduction
+
+In this project, I use data from the Henley Passport Index to create a map that allows us to visualize what visa policies apply to a specific passport. For instance, we can determine whether entry to the United States for holders of a specific passport is visa free or requires an online visa.
+
+```{r}
+# load packages
+library(dplyr)
+library(tidyr)
+library(jsonlite)
+library(purrr)
+library(tidyverse)
+library(plotly)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+# read data from tidy tuesday
+country_lists <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-09-09/country_lists.csv')
+rank_by_year <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-09-09/rank_by_year.csv')
+```
+
+```{r}
+# format the data from wide to long format making visa type as value
+travel_perms <- country_lists |> 
+  pivot_longer(
+    cols = c(visa_required, visa_online, visa_on_arrival, 
+             visa_free_access, electronic_travel_authorisation),
+    names_to = "visa_type",
+    values_to = "json_str"
+ ) |> 
+  mutate(
+    json_parsed = map(json_str, ~ fromJSON(.)[[1]])
+) |> 
+  unnest(json_parsed, names_sep = "_") |> 
+  select(-json_str) |> 
+  rename(from = code, from_name = country,
+         to = json_parsed_code, to_name = json_parsed_name) |> 
+  mutate(from = ifelse(from_name == "Namibia", "NA", from)) 
+
+# adding the home countries so that they show up on the map
+home_countries <- travel_perms |> 
+  select(from, from_name) |> 
+  distinct() |> 
+  mutate(visa_type = "domestic",
+         to = from,
+         to_name = from_name)
+
+# bind home countries to pivoted data
+travel_perms <- travel_perms |> rbind(home_countries)
+
+# load world map
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+# join map with wrangled data
+world_data <- world |> 
+  left_join(travel_perms, by = c("iso_a2_eh" = "to"))
+```
+
+```{r}
+#| fig-alt: "A world map plot where one can hover over each country to view the visa requirements for Mexican passports (e.g hovering over the US yields country: United States and Visa: visa_required"
+#| fig-cap: "Figure 1.1 - Henley Passport Index Data"
+
+# create a plot where one can hover over each country to see visa requirements for Mexican passports
+plot_ly(world_data) |> 
+  add_sf(
+    data = world_data |> filter(from == "MX"),
+    split = ~iso_a2_eh,
+    color = ~visa_type,
+    text = ~paste("Country:", to_name, "<br>Visa:", visa_type),
+    hoveron = "fills"
+  ) |> 
+  layout(title = " Visa Connections for Mexicans",    showlegend = FALSE)
+```
+
+### Plot Description
+
+The above plot shows visa requirements for Mexicans, which can be seen by hovering one's cursor over a specific country. The plot is color coded by the type of visa requirement, allowing us to see that Mexicans have visa free access in Europe and South America. However, there are more visa requirements for entry in Asia, Africa, and North America for Mexican passport holders.
+
+### **Sources**
+
+<a href = "https://www.henleyglobal.com/passport-index/about" target = "_blank" > Henley Passport Index</a>
+
+<a href = "https://github.com/rfordatascience/tidytuesday/tree/main/data/2025/2025-09-09" target = "_blank" > Tidy Tuesday Data</a>
+
+#### Citation
+
+Henley & Partners. (2025). The Henley Passport Index. *Exclusive Data from the International Air Transport Association (IATA).*

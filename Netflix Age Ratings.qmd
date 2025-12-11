@@ -1,0 +1,278 @@
+---
+title: "Netflix Age Ratings"
+description: |
+  Analysis of Netflix data from TidyTuesday.
+  
+  The data comes from Kaggle with credit to Shivam Bansal, consisting of tv shows and movies available on Netflix as of 2019. The dataset is collected from Flixable, a third-party Netflix search engine. In 2018, they released a report showing that the number of shows on Netflix has nearly tripled since 2010.
+
+author: "Timeo Coletta"
+date: October 5, 2025
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: visual
+execute:
+  warning: false
+  message: false
+---
+
+### **Analysis #1**
+
+What is the breakdown (in % terms) of ratings for productions based on their main listed genre on Netflix?
+
+#### **Genres**
+
+*Listed Alphabetically*
+
+1.  **Action & Adventure:** Action & Adventure + TV Action & Adventure
+2.  **Anime:** Anime Series
+3.  **Children & Family:** Children & Family Movies + Kids' TV
+4.  **Classics, Cult, & Musicals**: Classic & Cult TV + Classic Movies + Cult Movies + Music & Musicals
+5.  **Comedy & Drama**: Comedies + Stand-up Comedy + TV Comedies + Dramas + TV Dramas
+6.  **Crime:** Crime TV Shows
+7.  **Documentaries**: Documentaries + Docuseries
+8.  **Horror & Thriller**: Horror Movies + Thrillers + TV Horror
+9.  **Int'l & Independent:** British TV Shows + International TV shows + International Movies + Independent Movies
+10. **Reality**: Reality TV
+11. **Romance**: Romantic Movies + Romantic TV Shows
+12. **Sci-Fi & Fantasy**: Sci-Fi & Fantasy
+
+#### **Ratings**
+
+*Ordered from widest to smallest recommended audience*
+
+1.  **Y**: TV-Y
+2.  **Y7 & FV**: TV-Y7 + TV-7Y-FV
+3.  **G**: G + TV-G
+4.  **PG:** PG + TV-PG
+5.  **PG 13 & TV 14**: PG-13 + TV-14
+6.  **R & MA:** R + TV-MA + NC-17
+7.  **Other:** NR + UR + NA
+
+```{r}
+# load packages
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(tidyverse)
+library(plotly)
+library(rnaturalearth)
+library(gt)
+
+# read data from tidy tuesday
+Netflix_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-04-20/netflix_titles.csv')
+```
+
+```{r}
+# group subgenres into common genres and ratings into rating groups
+Genre_Ratings <- Netflix_data |>
+  mutate(
+    First_Genre = str_extract(listed_in, "^[^,]+"),
+    Genre = case_when(
+      str_detect(First_Genre, "Action|Adventure|TV Action") ~ "Action & Adventure",
+      str_detect(First_Genre, "Anime") ~ "Anime",
+      str_detect(First_Genre, "Children|Kids'|Family") ~ "Children & Family",
+      str_detect(First_Genre, "Classic|Cult|Musical") ~ "Classics, Cult, & Musicals",
+      str_detect(First_Genre, "Comedy|Stand-up|Drama") ~ "Comedy & Drama",
+      str_detect(First_Genre, "Crime") ~ "Crime",
+      str_detect(First_Genre, "Documentaries|Docuseries") ~ "Documentaries",
+      str_detect(First_Genre, "Horror|Thriller") ~ "Horror & Thriller",
+      str_detect(First_Genre, "British|International|Independent") ~ "Int'l & Independent",
+      str_detect(First_Genre, "Reality") ~ "Reality",
+      str_detect(First_Genre, "Romantic") ~ "Romance",
+      str_detect(First_Genre, "Sci-Fi|Fantasy") ~ "Sci-Fi & Fantasy",
+      TRUE ~ "Other")) |>
+  filter(Genre != "Other") |>
+  mutate( rating_ordered = case_when(
+      str_detect(rating, "^TV-Y$") ~ "Y",
+      str_detect(rating, "^(TV-Y7|TV-7Y-FV)$") ~ "Y7 & FV",
+      str_detect(rating, "^(G$|^TV-G)$") ~ "G",
+      str_detect(rating, "^(PG$|^TV-PG)$") ~ "PG",
+      str_detect(rating, "^(PG-13$|^TV-14)$") ~ "PG 13 & TV 14",
+      str_detect(rating, "^(R$|^TV-MA$|^NC-17)$") ~ "R & MA",
+      str_detect(rating, "^(NR$|^UR$|^NA)$") | is.na(rating) ~ "Other")) |>
+  select(title, rating, listed_in, Genre, rating_ordered)
+```
+
+```{r}
+# calculate the percentage of titles with a specific rating for each genre and add a column
+Ratings_Breakdown <- Genre_Ratings |>
+   count(Genre, rating_ordered) |>
+  group_by(Genre) |>
+  mutate(percentage = n / sum(n) * 100, rating_ordered = factor(
+      rating_ordered,
+      levels = c("Y", "Y7 & FV", "G", "PG", "PG 13 & TV 14", "R & MA", "Other"))) 
+```
+
+```{r}
+#| fig-alt: "Twelve faceted bar plots, one for each netflix genre, with each bar colored by the corresponding percentage of titles in a given age rating category."
+#| fig-cap: "Figure 1.1 - Netflix Data"
+
+# create bar plot of rating distributions across genres
+Ratings_Breakdown |>
+  ggplot(aes(x = rating_ordered, y = percentage, fill = rating_ordered)) +
+  geom_col(position = "dodge") +
+  facet_wrap(~Genre) +
+  labs(
+    title = "Rating Distribution by Genre",
+    subtitle = "Proportion (%)",
+    x = "Rating Group",
+    y = NULL,
+    fill = "Rating") + 
+  scale_y_continuous(
+    limits = c(0, 100)) +
+  theme_minimal() + 
+  theme(
+    strip.text = element_text(size = 6, face = "bold"), 
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank(),
+    panel.spacing = unit(1, "lines"))
+```
+
+#### **Plot description**
+
+The above plot displays the distribution of ratings based on the genre of a production that can be found on Netflix. Some genres overwhelmingly fit under a single rating. For example, the Comedy & Drama genre is mostly rated R & MA, with a similar but more marked trend in the Crime genre and Horror & Thriller genre. These three all have one rating category making up 60%+ of their respective genre's production. On the other hand, four genres are particularly balanced in their ratings split. The Children & Family genre, Classic, Cult, & Musicals genre, Reality genre, and the Documentaries genre all have at least three rating categories with a 20%+ share of their respective genre's productions. The other 5 genres fall somewhere in between these two groups.
+
+### **Analysis #2** 
+
+What is geographical split of production locations for titles added to Netflix in 2019 compared to those added in 2020?
+
+```{r}
+# sort titles by country of production and split them into numeric ranges, keeping only years of interest
+Geo_Data <- Netflix_data |>
+  mutate(year_added = as.numeric(str_sub(date_added, -4, -1)),
+    countries = str_split(country, ", ")) |>
+  select(year_added, country, countries) |>
+  filter(year_added == 2019 | year_added == 2020) |>
+  unnest(cols = countries) |>
+  count(countries, year_added, name = "n_titles") |>
+  mutate(
+    bin = case_when(
+      n_titles == 0 ~ "0",
+      n_titles <= 2 ~ "1-2",
+      n_titles <= 5 ~ "3-5",
+      n_titles <= 10 ~ "6-10",
+      n_titles <= 25 ~ "11-25",
+      TRUE ~ "25+"
+    )) |>
+   mutate(
+    countries = case_when(
+      countries == "German Democratic Republic" ~ "Germany",
+      countries == "Hong Kong SAR China" ~ "Hong Kong",
+      countries == "United States" ~ "United States of America",
+      countries == "Vatican City" ~ "Holy See",
+      TRUE ~ countries
+    ))
+```
+
+```{r}
+#| fig-alt: "Map plot that colors countries based on the number of titles produced in that country that Netflix added in 2019. Hovering cursor over a country allows viewing of country name and number of titles. Only a few countries had 25+ productions added to Netflix that year, and many countries had none."
+#| fig-cap: "Figure 2.1 - Netflix Data"
+
+# store world map
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+# join world map with data from 2019
+map_data_2019 <- world |>
+  left_join(Geo_Data |>    
+  filter(year_added == 2019)|>
+      mutate(
+        n_titles = ifelse(is.na(n_titles), 0, n_titles),
+        bin = factor(bin, levels = c("0", "1-2", "3-5", "6-10", "11-25", "25+"))
+      ),
+    by = c("name" = "countries"))
+
+# join world map with data from 2020
+map_data_2020 <- world |> 
+  left_join(Geo_Data |> 
+  filter(year_added == 2020)|>
+      mutate(
+        n_titles = ifelse(is.na(n_titles), 0, n_titles),
+        bin = factor(bin, levels = c("0", "1-2", "3-5", "6-10", "11-25", "25+"))
+      ),
+    by = c("name" = "countries"))
+
+# create the map plot for titles added in 2019 by country of production
+p2019 <- ggplot(map_data_2019) +
+  geom_sf(aes(fill = bin, text = paste0(name, ": ", n_titles, " titles")), color = NA) +
+  scale_fill_manual(
+    values = c("1-2" = "lightblue", "3-5" = "turquoise", "6-10" = "royalblue", "11-25" = "blue", "25+" = "navyblue"),
+    labels = c("1-2", "3-5", "6-10", "11-25", "25+", "0"),
+    na.value = "grey"
+  ) +
+  labs(
+    title = "Netflix Productions by Country (2019)",
+    fill = "Number of Titles"
+  ) +
+  theme_minimal()
+
+# create a hovering system to view number of titles and country name
+plot_2019 <- ggplotly(p2019, tooltip = "text")
+
+# create the map plot for titles added in 2020 by country of production
+p2020 <- ggplot(map_data_2020) +
+  geom_sf(aes(fill = bin, text = paste0(name, ": ", n_titles, " titles")), color = NA) +
+  scale_fill_manual(
+    values = c("1-2" = "lightblue", "3-5" = "turquoise", "6-10" = "royalblue", "11-25" = "blue", "25+" = "navyblue"),
+    labels = c("1-2", "3-5", "6-10", "11-25", "25+", "0"),
+    na.value = "grey"
+  ) +
+  labs(
+    title = "Netflix Productions by Country (2020)",
+    fill = "Number of Titles"
+  ) +
+  theme_minimal()
+
+# create a hovering system to view number of titles and country name
+plot_2020 <- ggplotly(p2020, tooltip = "text")
+
+
+plot_2019
+```
+
+```{r}
+#| fig-alt: "Map plot that colors countries based on the number of titles produced in that country that Netflix added in 2020. Hovering cursor over a country allows viewing of country name and number of titles. Only a few countries had 25+ productions added to Netflix that year, and many countries had none."
+#| fig-cap: "Figure 2.2 - Netflix Data"
+
+# load plot for 2020
+plot_2020
+```
+
+#### **Plot Description**
+
+The above maps display ranges for the number of titles added to Netflix by the country in which they were produced. By hovering your cursor over a country, you can identify the specific number of titles added. The comparison between 2019 and 2020 allows us to see which countries saw more of their productions added to the platform year over year. Focusing on North American countries, we see some interesting changes. While most productions added were in the US during both years, the number actually declined from 2019 to 2020, declining from 926 to 888 titles. Canada saw an increase from 91 to 115 titles. Finally, Mexico saw a decline from 41 to 32 titles. By conducting a broader time series analysis, we could make inferences about how some countries become more favorable production environments over time (which increases the number of titles produced in that country Netflix adds). Another explanation could be that as Netflix attempts to reach wider audiences, they diversify the titles that they offer on their streaming platform. A time series analysis could provide insight on Netflix's changing global content strategy.
+
+### **Analysis #3** 
+
+What is the average title length based on a production's type (show vs movie)? Do movie titles contain more descriptive phrases (like "The \[X\] of \[Y\]") compared to TV show titles
+
+```{r}
+#| fig-alt: "Table with columns type (values movie and show), Average title length (values 17.97303 and 16.86639), % w/ desc phrases (values 3.198810 and 2.116183), Total Titles (5377 and 2410)"
+#| fig-cap: "Figure 3.1 - Netflix Data"
+
+# create table that summarizes the percent of descriptive phrases by movie and show titles
+title_patterns <- Netflix_data |>
+  mutate( has_descriptive_phrase = str_detect(title, "(?i)(^| )(the|a|an) [a-z]+ of [a-z]+($| )"), word_count = str_count(title, "\\w+")) |>
+  group_by(type) |>
+  summarize(avg_title_length = mean(str_length(title)),
+    pct_desc_phrases = mean(has_descriptive_phrase) * 100, total_titles = n()) |>
+  mutate("Type" = type, "Avg Title Length" = avg_title_length, "% w/ desc phrases" = pct_desc_phrases, "Total Titles" = total_titles) |>
+  select("Type", "Avg Title Length", "% w/ desc phrases", "Total Titles") |>
+  gt()
+title_patterns
+```
+
+#### **Table Description**
+
+The above table tells us that the average movie title available on Netflix is 1 character longer than the average TV show title. This could be because movie directors follow more descriptive naming conventions. However, this difference is negligible and likely too small to derive any significant conclusions. In addition, we see that \~3.2% of movies have descriptive phrases in their title, compared to 2.1% in shows. This supports the inference that movie directors follow more descriptive naming conventions, which leads to a slightly higher average title length.
+
+### **Sources**
+
+<a href = "https://www.kaggle.com/datasets/shivamb/netflix-shows" target = "_blank" > Kaggle Data </a>
+
+<a href = "https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-04-20" target = "_blank" > Tidy Tuesday Data</a>
+
+#### Citation
+
+Bansal, S. (2019). *Netflix Shows and Movies Dataset*. Kaggle.

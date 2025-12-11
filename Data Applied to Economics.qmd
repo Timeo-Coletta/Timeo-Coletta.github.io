@@ -15,7 +15,7 @@ execute:
   message: false
 ---
 
-## Project 6: My Extra Element
+## My Economic Research
 
 ::::: columns
 ::: {.column width="50%"}

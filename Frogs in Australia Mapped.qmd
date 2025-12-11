@@ -1,0 +1,98 @@
+---
+title: "Frogs in Australia Mapped"
+description: |
+  Analysis of FrogID data from TidyTuesday
+  
+  The data comes from the 6th annual release of FrogID data. FrogID is an Australian frog call identification initiative. The FrogID mobile app allows citizen scientists to record and submit frog calls for museum experts to identify. Since 2017, FrogID data has contributed to over 30 scientific papers exploring frog ecology, taxonomy, and conservation.
+author: "Timeo Coletta"
+date: September 2, 2025
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: visual
+execute:
+  warning: false
+  message: false
+---
+
+### Introduction
+
+In this project, I use FrogID data to create a plot that visualizes frog population distributions per season based on their genus. The data was recorded in 2023 and allows us to identify trends in genera concentrations across Australia.
+
+```{r}
+# load packages
+library(maps)
+library(tidyverse)
+library(plotly)
+library(Polychrome)
+```
+
+```{r}
+# read data from tidy tuesday and seperate it by season
+frogID_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-09-02/frogID_data.csv') |> 
+  mutate(month = month(eventDate),
+         season = case_when(
+           month %in% c(12, 1, 2) ~ "winter",
+           month %in% c(3, 4, 5) ~ "spring",
+           month %in% c(6, 7, 8) ~ "summer",
+           month %in% c(9, 10, 11) ~ "fall"
+         ))
+
+# read data from tidy tuesday
+frog_names <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-09-02/frog_names.csv')
+
+# join both datasets by the frog's scientific name
+all_frogs <- frogID_data |>
+  left_join(frog_names, by = "scientificName") |> 
+  mutate(genus = stringr::str_extract(scientificName, "^\\w+"))
+```
+
+```{r}
+# create pallet of 26 colors
+mycols <- createPalette(26, c("#ff0000", "#00ff00", "#0000ff"))
+
+# assign each genus to a color on the pallet
+names(mycols) <- all_frogs |> select(genus) |> unique() |> pull()
+```
+
+```{r}
+# load the map of Australia and store it in an object
+australia_map <- maps::map(database = "world", region = "Australia",
+                     plot = FALSE)
+```
+
+```{r}
+#| fig-alt: "Four plots of the map of Australia, one for each season, with points representing frog genus presence in each season to show how genus distributions change each season."
+#| fig-cap: "Figure 1.1 - FrogID Data"
+
+# create faceted plot based on wrangled seasonal data and color points by genus
+ggplot(data = australia_map, 
+       aes(x = long, y = lat, group = group)) +
+  geom_polygon(fill = "white", color = "blue") + 
+  geom_point(data = all_frogs,
+             aes(x = decimalLongitude, 
+                 y = decimalLatitude, 
+                 color = genus),
+             size = 1,
+             inherit.aes = FALSE) +
+  theme_minimal() +
+  ggtitle("Frogs in Australia: 2023") + 
+  facet_wrap(~season) + 
+  labs(x = "", y = "") +
+  scale_color_manual(values = mycols)
+```
+
+### Plot Description
+
+The above plot shows how frog genera in Australia fluctuated in 2023. Some trends are clearly marked, like the Crinia's low count during the winter and Pseudophryne's presence only visible in the Spring. Other trends are harder to see, especially for smaller frog populations, but they can be observed with clarity if we were to look at each genus isolated from the others.
+
+### **Sources**
+
+<a href = "https://www.frogid.net.au/explore" target = "_blank" > FrogID Data </a>
+
+<a href = "https://github.com/rfordatascience/tidytuesday/tree/main/data/2025/2025-09-02" target = "_blank" > Tidy Tuesday Data</a>
+
+#### **Citation**
+
+Rowley, J.J.L., Callaghan, C.T., Cutajar, T., Portway, C., Potter K., Mahony, S, Trembath, D.F., Flemons, P. & Woods, A. (2019). FrogID: Citizen scientists provide validated biodiversity data on frogs of Australia. *Herpetological Conservation and Biology* 14(1): 155-170.

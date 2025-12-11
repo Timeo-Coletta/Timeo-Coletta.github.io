@@ -11,20 +11,22 @@ website:
       - about.qmd
       - text: "Data Science Projects"
         menu: 
-         - text: "Frogs in Australia"
-           href: 09-2 Frogs.html
-         - text: "Passport Index"
-           href: 09-9 Passport Index.html
-         - text: "Recipes"
-           href: 09-16 Recipes.html
-         - text: "Netflix"
-           href: 10-05 Netflix.html
-         - text: "Adoptions in Long Beach"
-           href: 10-28 Animal Shelter.html
-         - text: "Poorly Anonymized Data"
-           href: 11-11 Ethics - Poorly Anonymized Data.html
+         - text: "Frogs in Australia Mapped"
+           href: Frogs in Australia Mapped.html
+         - text: "Mexican Passport Visa Rules"
+           href: Mexican Passport Visa Rules.html
+         - text: "Recipes Search Engine"
+           href: Recipes Search Engine.html
+         - text: "Netflix Age Ratings"
+           href: Netflix Age Ratings.html
+         - text: "Cat & Dog Adoptions"
+           href: Cat & Dog Adoptions.html
+         - text: "NY Taxi Anonymity Breach"
+           href: NY Taxi Anonymity Breach.html
          - text: "Speeding Stops"
-           href: 12-1 Speeding Stops.html
+           href: Speeding Stops and Arrests.html
+      - text: "Speeding Stops & Arrests"
+        menu: 
          - text: "Data Applied to Economics"
            href: Data Applied to Economics.html
       

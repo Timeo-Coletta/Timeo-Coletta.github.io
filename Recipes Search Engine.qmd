@@ -1,0 +1,96 @@
+---
+title: "Recipes Search Engine"
+description: |
+  Analysis of Allrecipes data from TidyTuesday
+  
+   The data comes from the tastyR package (a dataset assembled from Allrecipes.com), containing two complementary datasets: allrecipes with 14,426 general recipes, and cuisines with 2,218 recipes categorized by country of origin. Both datasets include comprehensive recipe information such as ingredients, nutritional facts (calories, fat, carbs, protein), cooking times (preparation and cooking), ratings, and review metadata. All data has been cleaned and standardized, ready for analysis.
+author: "Timeo Coletta"
+date: September 16, 2025
+format: 
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: visual
+execute:
+  warning: false
+  message: false
+---
+
+### Introduction
+
+In this project, I use data from the all recipes website to create a localized search engine in a table where one can search for recipes based on cuisine and name. The table also links to the original all recipes website in case the user wishes to directly access that page.
+
+```{r}
+# load packages
+library(tidyverse)
+library(DT)
+library(fontawesome)
+fontawesome::fa_html_dependency()
+```
+
+```{r}
+# read data from tidy tuesday
+all_recipes <- readr::read_csv ('https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-09-16/all_recipes.csv')
+
+# read data from tidy tuesday and create new columuns to prepare for table creation
+cuisines <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-09-16/cuisines.csv') |> 
+  mutate(name_link = paste0('<a href = "',url,'">',name,'</a>')) |> 
+  rename(cuisine = country) |> 
+  mutate(full = floor(avg_rating + 0.25),
+         half = ifelse((avg_rating + 0.25 - full) >= 0.5, 1, 0),
+         empty = 5 - full - half) |> 
+  mutate(stars = ifelse(is.na(avg_rating), NA,
+                              paste0( 
+    strrep('<span style="color: gold;">&#9733;</span>', full),
+    strrep('<span style="color: gold;"><i class="fa-solid fa-star-half"></i></span>', half),
+    strrep('<span style="color: lightgray;">&#9733;</span>', empty)
+  
+)))
+```
+
+```{r}
+#| fig-alt: "A search engine allowing the user to access recipe information from the all recipes website, with dropdowns for nutrional info, rating info, and cook info."
+#| fig-cap: "Figure 1.1 All Recipes Data"
+
+# creates the allrecipes search engine table
+cuisines |> 
+  select(name_link, stars, cuisine, calories, fat, carbs,
+         protein, avg_rating, total_ratings, reviews,
+         prep_time, cook_time, total_time, servings) |> 
+  janitor::clean_names(case = "title") |> 
+  DT::datatable(escape = FALSE,
+                class = 'display',
+                extensions = 'Buttons',
+                rownames = FALSE,
+                filter = 'top',
+                options = list(
+                  dom = 'Bfrtip',
+                  buttons = list(
+                    list(extend = 'colvis', 
+                         text = 'select nutritional info',
+                         columns = c(3:6)),
+                    list(extend = 'colvis', 
+                         text = 'select rating info',
+                         columns = c(7:9)),                    
+                    list(extend = 'colvis', 
+                         text = 'select cook info',
+                         columns = c(10:13))  
+                    ),
+                  columnDefs = list(list(visible = FALSE,
+                                         targets = c(3:13)))
+                ))
+```
+
+### Table Description
+
+The above table allows us to sort recipes based on a variety of factors including stars. If we sort by stars, we find that the Saganaki (flaming Greek cheese) comes out as the recipe with the most stars on the website. The recipe with the most ratings is garlic fried chicken at 975.
+
+### **Sources**
+
+<a href = "https://cran.r-project.org/package=tastyR" target = "_blank" > Allrecipes </a>
+
+<a href = "https://github.com/rfordatascience/tidytuesday/tree/main/data/2025/2025-09-16" target = "_blank" > Tidy Tuesday Data</a>
+
+#### **Citation**
+
+Mubia, B. (2025). *tastyR: Recipe Data from 'Allrecipes.com'*. R package version 0.1.0.
