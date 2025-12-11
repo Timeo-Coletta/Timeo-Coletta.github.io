@@ -19,9 +19,17 @@ execute:
 
 
 
+
+
+
+
 ## Introduction
 
 In my analysis, I work with tables containing data on traffic stops made by state patrols in Rhode Island, North Carolina, and Massachusetts. Specifically, I examine whether there are differences across states in the proportion of arrests made during traffic stops with speeding as the stated reason for the stop. I consider the time period from 2007 to 2015, as the data tables overlap over this time frame. I hypothesize that Rhode Island has a higher proportion of arrests made for speeding stops than the two other states given its higher population density, which I infer makes for stricter speeding laws. I expect the difference to be smaller between Rhode Island and Massachusetts, given that the difference in their population density is very small.
+
+
+
+
 
 
 
@@ -96,9 +104,17 @@ LIMIT 0, 10;
 
 
 
+
+
+
+
 ## Data Wrangling
 
 In the SQL query below, I calculate the yearly arrest percentages for traffic stops due to speeding in each state and join the results to create a data table with state-year pair observations. Storing the output table as an object in R allows me to use it later on for data visualization and statistical tests. Below is a preview of what the table looks like.
+
+
+
+
 
 
 
@@ -156,7 +172,15 @@ dbDisconnect(con_traffic)
 
 
 
+
+
+
+
 ## Plot #1 & Description
+
+
+
+
 
 
 
@@ -184,6 +208,10 @@ ggplot(stops_table, aes(x = year, y = arrest_percentage, color = state, group = 
 
 
 
+
+
+
+
 The above plot portrays the time series trend of arrest percentages for speeding-induced traffic stops in each respective state. It is interesting to note that North Carolina has higher consistency in arrest percentage over time than the other two states, who both trend downwards. This could signal that, in MA & RI, certain policies were enacted that reduced the chance of a speeding offense leading to arrest, such as more lenient regulations. North Carolina might have already had lenient regulations on speeding, so the proportion of arrests remains at a low point (whereas MA & RI could have been in transitional policy stages).
 
 ## Plot #2 & Description
@@ -191,6 +219,10 @@ The above plot portrays the time series trend of arrest percentages for speeding
 **Comparison: RI vs MA**
 
 -   Determining whether Rhode Island has a statistically significantly *higher* average arrest percentage for speeding stops compared to Massachusetts over the 2007-2015 period.
+
+
+
+
 
 
 
@@ -236,6 +268,10 @@ stops_table |>
 
 
 
+
+
+
+
 The above plot showcases the difference in arrest percentages between Rhode Island and Massachusetts, with RI higher than MA. However, the p-value is greater than 0.05 which means the difference is not statistically significant (confidence interval of 95%), which I infer is because the population densities of both states are extremely similar (so I'd assume they have stricter regulations around speeding).
 
 ## Plot #3 & Description
@@ -243,6 +279,10 @@ The above plot showcases the difference in arrest percentages between Rhode Isla
 **Comparison: RI vs NC**
 
 -   Determining whether Rhode Island has a statistically significantly *higher* average arrest percentage for speeding stops compared to North Carolina over the 2007-2015 period
+
+
+
+
 
 
 
@@ -271,6 +311,10 @@ stops_table |>
 
 
 
+
+
+
+
 Based on the above plot, we can see that Rhode Island has a statistically significant (p \< 0.05) higher proportion of arrests for speeding-induced traffic stops than North Carolina. It is possible that North Carolina's much smaller population density (around 1/5) has prompted less serious penalties for speeding in the state, but I can only infer.
 
 ## Conclusion
@@ -286,4 +330,5 @@ In summary, the difference between RI and NC being statistically significant. Al
 #### Citation
 
 Pierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. “A Large-Scale Analysis of Racial Disparities in Police Stops Across the United States.” *Nature Human Behaviour*, 1–10
+
 
