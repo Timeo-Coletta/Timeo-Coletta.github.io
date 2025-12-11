@@ -31,7 +31,6 @@ website:
            href: Data Applied to Economics.html
          - text: "Green Development Project"
            href: Green Development Project.html
-      
 format:
   html:
     theme:
