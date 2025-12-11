@@ -29,6 +29,8 @@ website:
         menu: 
          - text: "Green Development Project"
            href: Green Development Project.html
+         - text: "Monetary Policy Project"
+           href: Monetary Policy Project.html
          - text: "Data Applied to Economics"
            href: Data Applied to Economics.html
 
