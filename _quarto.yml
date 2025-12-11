@@ -27,10 +27,10 @@ website:
            href: Speeding Stops and Arrests.html
       - text: "Economics Projects"
         menu: 
-         - text: "Data Applied to Economics"
-           href: Data Applied to Economics.html
          - text: "Green Development Project"
            href: Green Development Project.html
+         - text: "Data Applied to Economics"
+           href: Data Applied to Economics.html
 format:
   html:
     theme:
