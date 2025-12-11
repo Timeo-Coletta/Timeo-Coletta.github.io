@@ -23,9 +23,9 @@ website:
            href: Cat & Dog Adoptions.html
          - text: "NY Taxi Anonymity Breach"
            href: NY Taxi Anonymity Breach.html
-         - text: "Speeding Stops"
+         - text: "Speeding Stops and Arrests"
            href: Speeding Stops and Arrests.html
-      - text: "Speeding Stops & Arrests"
+      - text: "Economics Projects"
         menu: 
          - text: "Data Applied to Economics"
            href: Data Applied to Economics.html
