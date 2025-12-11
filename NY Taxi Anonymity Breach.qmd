@@ -6,7 +6,7 @@ format: html
 editor: visual
 ---
 
-### Introduction
+### **Introduction**
 
 With the 2014 release of data on 173 million New York City cab rides, the importance of the ethics of anonymity were highlighted when the city government failed to protect drivers' identitites. Here, I identify the ethical risks that arise with poorly anonymized data.
 

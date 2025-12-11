@@ -16,7 +16,7 @@ execute:
   message: false
 ---
 
-### Introduction
+### **Introduction**
 
 In this project, I use FrogID data to create a plot that visualizes frog population distributions per season based on their genus. The data was recorded in 2023 and allows us to identify trends in genera concentrations across Australia.
 
@@ -83,7 +83,7 @@ ggplot(data = australia_map,
   scale_color_manual(values = mycols)
 ```
 
-### Plot Description
+### **Plot Description**
 
 The above plot shows how frog genera in Australia fluctuated in 2023. Some trends are clearly marked, like the Crinia's low count during the winter and Pseudophryne's presence only visible in the Spring. Other trends are harder to see, especially for smaller frog populations, but they can be observed with clarity if we were to look at each genus isolated from the others.
 
