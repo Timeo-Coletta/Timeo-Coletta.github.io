@@ -1,7 +1,7 @@
 ---
 title: "Green Development Project"
 description: |
-      Below is the embedded PDF of an International Economics research project with applied data from the World Bank, OECD, and United Nations. Attached at the bottom of the page is the github environment with the source code for the visualizations and regressions included in the paper.
+      Below is the embedded PDF of an International Economics research project with applied data from the World Bank, OECD, and United Nations. Attached at the bottom of the page is the github environment with the source code for the visualizations and regressions included in the paper. The "Data Applied to Economics" presentation dropdown also highlights some of the code.
 authors: "Timeo Coletta & Kylie Liu"
 date: December 10, 2025
 format: 
@@ -14,8 +14,12 @@ execute:
   message: false
 ---
 
-<iframe src="Econ123FinalPaper.pdf" width="100%" height="600px" style="border: none;"></iframe>
+<iframe src="Econ123FinalPaper.pdf" width="100%" height="600px" style="border: none;">
+
+</iframe>
 
 ### Source Code
 
 `<a href = "`{=html}https://github.com/Timeo-Coletta/International-Economics-Project`" target = "_blank" >`{=html}Project Github Page</a>
+
+`<a href = "`{=html}https://docs.google.com/presentation/d/1nOmVGYvgnwZQjVS3wm9UTqsfhNEQlpQl3RO6wlt5oMY/edit?usp=sharing`" target = "_blank" >`{=html}Presentation</a>
